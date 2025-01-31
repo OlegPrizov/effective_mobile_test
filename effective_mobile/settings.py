@@ -108,3 +108,5 @@ SIMPLE_JWT = {
 }
 
 LOGIN_REDIRECT_URL = '/'
+
+LOGIN_URL = '/auth/login/'

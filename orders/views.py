@@ -1,35 +1,36 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, UpdateView
 from django.urls import reverse_lazy
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from .forms import OrderForm
 from .models import Order
 from dishes.models import Dish
-from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
 
-class CreateOrder(CreateView):
-    model = Order  # Указываем модель для представления
-    form_class = OrderForm  # Используем форму для создания заказа
-    success_url = reverse_lazy('orders:order_list')  # Страница, куда перейдём после успешного создания
-    template_name = 'create_order.html'  # Шаблон для отображения формы
+class CreateOrder(LoginRequiredMixin, CreateView):
+    model = Order
+    form_class = OrderForm
+    success_url = reverse_lazy('orders:order_list')
+    template_name = 'create_order.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Добавляем все блюда в контекст
-        context['dishes'] = Dish.objects.all()  # Все доступные блюда
-        return context
-
-class UpdateOrder(UpdateView):
-    model = Order  # Модель для редактирования
-    form_class = OrderForm  # Форма для редактирования
-    template_name = 'update_order.html'  # Шаблон для редактирования
-    success_url = reverse_lazy('orders:order_list')  # Куда перенаправлять после сохранения
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # Добавляем доступные блюда в контекст (если нужно)
         context['dishes'] = Dish.objects.all()
         return context
 
+class UpdateOrder(LoginRequiredMixin, UpdateView):
+    model = Order
+    form_class = OrderForm
+    template_name = 'update_order.html'
+    success_url = reverse_lazy('orders:order_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['dishes'] = Dish.objects.all()
+        return context
+
+@login_required
 def orders_list(request):
     table_number = request.GET.get('table_number')
     status = request.GET.get('status')
@@ -47,7 +48,7 @@ def orders_list(request):
         'status': status,
     })
 
-
+@login_required
 def delete_order(request, pk):
     order = get_object_or_404(Order, pk=pk)
     order.delete()
