@@ -5,15 +5,15 @@ from dishes.models import Dish
 
 class Order(models.Model):
     STATUS_CHOICES = [
-        ('pending', 'Pending'),  # В ожидании
-        ('completed', 'Completed'),  # Готово
-        ('paid', 'Paid'),  # Оплачено
+        ('pending', 'Pending'),
+        ('completed', 'Completed'),
+        ('paid', 'Paid'),
     ]
 
-    table_number = models.PositiveIntegerField()  # Номер стола
-    items = models.ManyToManyField(Dish)  # Список блюд
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)  # Общая стоимость
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')  # Статус заказа
+    table_number = models.PositiveIntegerField()
+    items = models.ManyToManyField(Dish)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
 
     def __str__(self):
         return f"Order #{self.id} - Table {self.table_number}"
