@@ -11,13 +11,13 @@
 6. Перейти в браузере по ссылке http://127.0.0.1:8000/
 
 Также реализовано API:
-POST /api/auth/users/ – зарегистрировать нового пользователя
-GET /api/auth/users/me/ – получить текущего пользователя
-POST /api/auth/jwt/create/ – получить jwt токен
-POST /api/auth/jwt/refresh/ – обновить jwt токен
-POST api/orders/ – добавляет заказ
-DELETE /orders/{id}/ – удаляет заказ 
-PUT /orders/{id}/ - изменяет заказ
-GET /orders/ – отображает все заказы
+1. POST /api/auth/users/ – зарегистрировать нового пользователя
+2. GET /api/auth/users/me/ – получить текущего пользователя
+3. POST /api/auth/jwt/create/ – получить jwt токен
+4. POST /api/auth/jwt/refresh/ – обновить jwt токен
+5. POST api/orders/ – добавляет заказ
+6. DELETE /orders/{id}/ – удаляет заказ 
+7. PUT /orders/{id}/ - изменяет заказ
+8. GET /orders/ – отображает все заказы
 
 *Автор: [Призов Олег](https://github.com/OlegPrizov/)* 
