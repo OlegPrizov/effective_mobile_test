@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Создать заказ{% endblock %}
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-md-8 p-5">
+      <div class="card">
+        <div class="card-header">Создать заказ</div>
+          <div class="card-body">
+          {% load user_filters %}
+
+              <form method="post" action="{% url 'orders:create_order' %}">
+              {% csrf_token %}
+        
+              <div>
+                <label for="{{ form.table_number.id_for_label }}">Номер стола:</label>
+                <input type="number" name="table_number" value="{{ form.table_number.value }}" />
+            </div>
+        
+            <div>
+                <label for="id_items">Выберите блюда:</label>
+                <div>
+                    {% for dish in dishes %}
+                        <label>
+                            <input type="checkbox" name="items" value="{{ dish.id }}" /> {{ dish.name }}
+                        </label><br>
+                    {% endfor %}
+                </div>
+            </div>
+        
+            <div>
+                <label for="{{ form.status.id_for_label }}">Статус:</label>
+                {{ form.status }}
+            </div>
+              <div class="col-md-6 offset-md-4">
+                <button type="submit" class="btn btn-primary">
+                  Создать заказ
+                </button>
+              </div>
+            </form>
+          </div>
+        </div> 
+      </div> 
+  </div>
+{% endblock %}

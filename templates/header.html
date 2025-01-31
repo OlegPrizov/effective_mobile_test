@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: lightskyblue;">
+  <div class="container">
+    <a class="navbar-brand text-white" href="#">Effective Mobile Food</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      {% with request.resolver_match.view_name as view_name %}
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link text-white {% if view_name == 'users:logout' %}active fw-bold{% endif %}" href="{% url 'users:logout' %}">Выйти</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white {% if view_name == 'users:login' %}active fw-bold{% endif %}" href="{% url 'users:login' %}">Войти</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white {% if view_name == 'users:signup' %}active fw-bold{% endif %}" href="{% url 'users:signup' %}">Регистрация</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white {% if view_name == 'dishes:index' %}active fw-bold{% endif %}" href="{% url 'dishes:index' %}">Меню</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white {% if view_name == 'orders:order_list' %}active fw-bold{% endif %}" href="{% url 'orders:order_list' %}">Заказы</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white {% if view_name == 'orders:create_order' %}active fw-bold{% endif %}" href="{% url 'orders:create_order' %}">Создать заказ</a>
+        </li>
+      </ul>
+      {% endwith %}
+    </div>
+  </div>
+</nav>

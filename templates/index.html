@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+Меню блюд
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Меню блюд</h1>
+  <ul class="list-group">
+    {% for dish in dishes %}
+    <li class="list-group-item p-4 mb-3 shadow-sm rounded">
+      <h5 class="mb-2 text-primary">{{ dish.name }}</h5>
+      <p class="mb-1 text-muted">{{ dish.description }}</p>
+      <strong class="text-success">Цена: {{ dish.price }} руб.</strong>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
